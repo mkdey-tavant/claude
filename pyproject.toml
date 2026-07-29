@@ -57,3 +57,20 @@ select = ["E", "F", "I", "UP", "B", "SIM"]
 python_version = "3.12"
 warn_unused_ignores = true
 ignore_missing_imports = true
+
+[tool.coverage.run]
+omit = [
+    "*/logging_config.py",
+]
+
+[tool.coverage.report]
+exclude_lines = [
+    "pragma: no cover",
+    "def __repr__",
+    "raise AssertionError",
+    "raise NotImplementedError",
+    "if __name__ == .__main__.:",
+    "if TYPE_CHECKING:",
+    "class .*\\bProtocol\\):",
+    "@(abc\\.)?abstractmethod",
+]
