@@ -115,9 +115,7 @@ class NewsItem(BaseModel):
 class Outlook(BaseModel):
     """A structured, disclaimered synthesis for the calling LLM to build a forecast on."""
 
-    composite_score: float = Field(
-        description="Blended technical+fundamental score, -100..+100."
-    )
+    composite_score: float = Field(description="Blended technical+fundamental score, -100..+100.")
     bias: str = Field(
         description="bullish | cautiously_bullish | neutral | cautiously_bearish | bearish"
     )

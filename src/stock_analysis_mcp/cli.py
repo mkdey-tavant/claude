@@ -56,10 +56,33 @@ def cyan(s: str) -> str:
 
 
 # Map a verdict/signal/rating label to a colour function (case-insensitive lookup).
-_POSITIVE = {"bullish", "cautiously_bullish", "up", "strong_up", "strong", "healthy",
-             "risk_on", "low", "strong_buy", "buy", "positive"}
-_NEGATIVE = {"bearish", "cautiously_bearish", "down", "strong_down", "weak",
-             "risk_off", "high", "very_high", "sell", "reduce", "negative", "cautious"}
+_POSITIVE = {
+    "bullish",
+    "cautiously_bullish",
+    "up",
+    "strong_up",
+    "strong",
+    "healthy",
+    "risk_on",
+    "low",
+    "strong_buy",
+    "buy",
+    "positive",
+}
+_NEGATIVE = {
+    "bearish",
+    "cautiously_bearish",
+    "down",
+    "strong_down",
+    "weak",
+    "risk_off",
+    "high",
+    "very_high",
+    "sell",
+    "reduce",
+    "negative",
+    "cautious",
+}
 
 
 def _tag(label: str) -> str:
@@ -219,15 +242,16 @@ def build_parser() -> argparse.ArgumentParser:
     )
     p.add_argument("symbol", help="Stock name or ticker, e.g. RELIANCE, TCS, INFY.NS")
     p.add_argument(
-        "-m", "--market",
+        "-m",
+        "--market",
         default=settings.default_market,
         choices=["NSE", "BSE", "nse", "bse"],
         help=f"Preferred exchange (default: {settings.default_market}).",
     )
     p.add_argument(
-        "-s", "--section",
-        choices=["all", "technical", "fundamental", "risk", "market", "outlook",
-                 "recommendation"],
+        "-s",
+        "--section",
+        choices=["all", "technical", "fundamental", "risk", "market", "outlook", "recommendation"],
         default="all",
         help="Limit output to one section (default: all). JSON output is always full.",
     )

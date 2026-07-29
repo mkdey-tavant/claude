@@ -69,9 +69,7 @@ def _parse_news(raw_items: list[dict[str, Any]]) -> list[NewsItem]:
             link = url_field.get("url")
         link = link or it.get("link")
         published = content.get("pubDate") or content.get("displayTime")
-        items.append(
-            NewsItem(title=title, publisher=publisher, link=link, published=published)
-        )
+        items.append(NewsItem(title=title, publisher=publisher, link=link, published=published))
     return items[:6]
 
 

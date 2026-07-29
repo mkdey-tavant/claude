@@ -65,9 +65,7 @@ def bollinger_bands(
     lower = middle - num_std * std
     width = upper - lower
     percent_b = (close - lower) / width.replace(0.0, np.nan)
-    return pd.DataFrame(
-        {"middle": middle, "upper": upper, "lower": lower, "percent_b": percent_b}
-    )
+    return pd.DataFrame({"middle": middle, "upper": upper, "lower": lower, "percent_b": percent_b})
 
 
 def true_range(high: pd.Series, low: pd.Series, close: pd.Series) -> pd.Series:

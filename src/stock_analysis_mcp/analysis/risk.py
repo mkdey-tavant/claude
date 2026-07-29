@@ -66,8 +66,7 @@ def analyze(data: StockData, benchmark_returns: pd.Series | None = None) -> Risk
     hist = data.history
     if hist is None or len(hist) < _MIN_ROWS:
         raise InsufficientHistoryError(
-            f"Need at least {_MIN_ROWS} trading days for risk metrics on "
-            f"{data.resolved_symbol}."
+            f"Need at least {_MIN_ROWS} trading days for risk metrics on {data.resolved_symbol}."
         )
 
     settings = get_settings()
@@ -86,9 +85,7 @@ def analyze(data: StockData, benchmark_returns: pd.Series | None = None) -> Risk
     var95 = _historical_var(returns)
 
     downside = returns[returns < 0]
-    downside_dev = (
-        float(downside.std(ddof=0) * np.sqrt(_TRADING_DAYS)) if len(downside) else None
-    )
+    downside_dev = float(downside.std(ddof=0) * np.sqrt(_TRADING_DAYS)) if len(downside) else None
 
     beta = None
     if benchmark_returns is not None:

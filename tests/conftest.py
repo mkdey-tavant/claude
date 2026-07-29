@@ -16,9 +16,7 @@ def _make_history(prices: np.ndarray) -> pd.DataFrame:
     low = close * 0.99
     open_ = close.shift(1).fillna(close.iloc[0])
     volume = pd.Series(np.full(len(prices), 2_000_000.0), index=idx)
-    return pd.DataFrame(
-        {"Open": open_, "High": high, "Low": low, "Close": close, "Volume": volume}
-    )
+    return pd.DataFrame({"Open": open_, "High": high, "Low": low, "Close": close, "Volume": volume})
 
 
 @pytest.fixture
