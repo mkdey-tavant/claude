@@ -168,8 +168,8 @@ def render_text(a: FullAnalysis) -> str:
     lines.append(_kv("Debt / Equity", _fmt(f.debt_to_equity)))
     growth = f"{_fmt(f.revenue_growth, '%')} / {_fmt(f.earnings_growth, '%')}"
     lines.append(_kv("Rev / Earn growth", growth))
-    for o in f.observations:
-        lines.append(dim(f"    • {o}"))
+    for obs in f.observations:
+        lines.append(dim(f"    • {obs}"))
 
     # Risk
     r = a.risk
@@ -180,8 +180,8 @@ def render_text(a: FullAnalysis) -> str:
     lines.append(_kv("Max drawdown", _pct(r.max_drawdown)))
     lines.append(_kv("Sharpe ratio", _fmt(r.sharpe_ratio)))
     lines.append(_kv("1-day VaR (95%)", _pct(r.value_at_risk_95)))
-    for o in r.observations:
-        lines.append(dim(f"    • {o}"))
+    for obs in r.observations:
+        lines.append(dim(f"    • {obs}"))
 
     # Market context
     m = a.market_context
