@@ -103,17 +103,21 @@ def adx(
     tr = true_range(high, low, close)
     atr_ = tr.ewm(alpha=1 / window, adjust=False, min_periods=window).mean()
 
-    plus_di = 100.0 * (
+    plus_di_raw = (
         plus_dm.ewm(alpha=1 / window, adjust=False, min_periods=window).mean()
         / atr_.replace(0.0, np.nan)
     )
-    minus_di = 100.0 * (
+    minus_di_raw = (
         minus_dm.ewm(alpha=1 / window, adjust=False, min_periods=window).mean()
         / atr_.replace(0.0, np.nan)
     )
 
-    dx = 100.0 * (plus_di - minus_di).abs() / (plus_di + minus_di).replace(0.0, np.nan)
+    dx = 100.0 * (plus_di_raw - minus_di_raw).abs() / (plus_di_raw + minus_di_raw).replace(0.0, np.nan)
     adx_ = dx.ewm(alpha=1 / window, adjust=False, min_periods=window).mean()
+    adx_ = adx_.clip(upper=100.0)
+
+    plus_di = 100.0 * plus_di_raw
+    minus_di = 100.0 * minus_di_raw
     return pd.DataFrame({"adx": adx_, "plus_di": plus_di, "minus_di": minus_di})
 
 
