@@ -103,14 +103,12 @@ def adx(
     tr = true_range(high, low, close)
     atr_ = tr.ewm(alpha=1 / window, adjust=False, min_periods=window).mean()
 
-    plus_di_raw = (
-        plus_dm.ewm(alpha=1 / window, adjust=False, min_periods=window).mean()
-        / atr_.replace(0.0, np.nan)
-    )
-    minus_di_raw = (
-        minus_dm.ewm(alpha=1 / window, adjust=False, min_periods=window).mean()
-        / atr_.replace(0.0, np.nan)
-    )
+    plus_di_raw = plus_dm.ewm(
+        alpha=1 / window, adjust=False, min_periods=window
+    ).mean() / atr_.replace(0.0, np.nan)
+    minus_di_raw = minus_dm.ewm(
+        alpha=1 / window, adjust=False, min_periods=window
+    ).mean() / atr_.replace(0.0, np.nan)
 
     di_sum = (plus_di_raw + minus_di_raw).replace(0.0, np.nan)
     dx = 100.0 * (plus_di_raw - minus_di_raw).abs() / di_sum
