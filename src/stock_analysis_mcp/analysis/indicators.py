@@ -112,7 +112,8 @@ def adx(
         / atr_.replace(0.0, np.nan)
     )
 
-    dx = 100.0 * (plus_di_raw - minus_di_raw).abs() / (plus_di_raw + minus_di_raw).replace(0.0, np.nan)
+    di_sum = (plus_di_raw + minus_di_raw).replace(0.0, np.nan)
+    dx = 100.0 * (plus_di_raw - minus_di_raw).abs() / di_sum
     adx_ = dx.ewm(alpha=1 / window, adjust=False, min_periods=window).mean()
     adx_ = adx_.clip(upper=100.0)
 
